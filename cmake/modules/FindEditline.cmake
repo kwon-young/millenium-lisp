@@ -21,26 +21,17 @@
 #  EDITLINE_VERSION_MINOR      The version minor of Editline
 
 find_path(EDITLINE_INCLUDE_DIR
-  NAMES histedit.h
+  NAMES editline.h
   HINTS ${EDITLINE_ROOT_DIR}/include)
 
 if (EDITLINE_INCLUDE_DIR)
-  file(STRINGS ${EDITLINE_INCLUDE_DIR}/histedit.h
+  file(STRINGS ${EDITLINE_INCLUDE_DIR}/editline.h
     editline_header REGEX "^#define.LIBEDIT_[A-Z]+.*$")
 
-  string(REGEX REPLACE ".*#define.LIBEDIT_MAJOR[ \t]+([0-9]+).*" "\\1"
-    EDITLINE_VERSION_MAJOR ${editline_header})
-  string(REGEX REPLACE ".*#define.LIBEDIT_MINOR[ \t]+([0-9]+).*" "\\1"
-    EDITLINE_VERSION_MINOR ${editline_header})
-
-  set(EDITLINE_VERSION_MAJOR ${EDITLINE_VERSION_MAJOR} CACHE STRING "" FORCE)
-  set(EDITLINE_VERSION_MINOR ${EDITLINE_VERSION_MINOR} CACHE STRING "" FORCE)
-  set(EDITLINE_VERSION ${EDITLINE_VERSION_MAJOR}.${EDITLINE_VERSION_MINOR}
-    CACHE STRING "" FORCE)
 endif ()
 
 find_library(EDITLINE_LIBRARIES
-  NAMES edit
+  NAMES editline
   HINTS ${EDITLINE_ROOT_DIR}/lib)
 
 include(FindPackageHandleStandardArgs)

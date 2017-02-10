@@ -43,7 +43,6 @@ set(mlisp_libraries)
 find_package(Editline)
 
 if (EDITLINE_FOUND)
-  message(FATAL_ERROR "libedit too old: ${EDITLINE_VERSION}, need >= 2.11")
   set(mlisp_libraries ${mlisp_libraries} ${EDITLINE_LIBRARIES})
   include_directories(${EDITLINE_INCLUDE_DIR})
 endif ()
