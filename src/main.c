@@ -8,7 +8,7 @@ void intro()
 {
   printf("*** Millenium Lisp %s ***\n", gGIT_VERSION_SHORT);
   puts("Fun lisp implementation in C!");
-  puts("Well ..., have fun!");
+  puts("Well ..., have fun!\n");
 }
 
 int main(int argc, char *argv[])
