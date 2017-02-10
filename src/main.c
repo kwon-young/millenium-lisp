@@ -4,6 +4,10 @@
 
 #include "version.h"
 
+//! Intro message
+/*!
+ * Print the intro message
+ */
 void intro()
 {
   printf("*** Millenium Lisp %s ***\n", gGIT_VERSION_SHORT);
