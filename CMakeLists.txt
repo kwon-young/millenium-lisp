@@ -49,18 +49,21 @@ endif ()
 
 # Adding project include directory
 include_directories(include)
+include_directories(mpc)
 
 # Generate list of source file
 file(
   GLOB_RECURSE
   source_files
   src/*
+  mpc/mpc.c
   )
 
 file(
   GLOB_RECURSE
   header_files
   include/*
+  mpc/mpc.h
   )
 
 # Executable declaration
