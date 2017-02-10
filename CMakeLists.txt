@@ -24,6 +24,30 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules/version.c.in
                 ${CMAKE_CURRENT_BINARY_DIR}/version.c)
 set(version_file "${CMAKE_CURRENT_BINARY_DIR}/version.c")
 
+# check for doxygen and add custom "doc" target to Makefile
+find_package(Doxygen)
+if (DOXYGEN_FOUND)
+  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile.in
+                 ${CMAKE_CURRENT_SOURCE_DIR}/Doxyfile
+                 @ONLY)
+  add_custom_target(doc ${DOXYGEN_EXECUTABLE} ${CMAKE_HOME_DIRECTORY}/Doxyfile
+                    WORKING_DIRECTORY ${CMAKE_HOME_DIRECTORY}
+                    COMMENT "Generating API documentation with Doxygen"
+                    VERBATIM)
+endif (DOXYGEN_FOUND)
+
+# hold all libraries to link to
+set(mlisp_libraries)
+
+# Search editline library
+find_package(Editline)
+
+if (EDITLINE_FOUND)
+  message(FATAL_ERROR "libedit too old: ${EDITLINE_VERSION}, need >= 2.11")
+  set(mlisp_libraries ${mlisp_libraries} ${EDITLINE_LIBRARIES})
+  include_directories(${EDITLINE_INCLUDE_DIR})
+endif ()
+
 # Adding project include directory
 include_directories(include)
 
@@ -47,3 +71,4 @@ add_executable(
   ${header_files}
   ${version_file}
   )
+target_link_libraries(mlisp ${mlisp_libraries})
