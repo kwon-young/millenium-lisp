@@ -2,9 +2,11 @@
 #include <stdio.h>
 #include <stdbool.h>
 
+#include "version.h"
+
 void intro()
 {
-  puts("*** Millenium Lisp ***");
+  printf("*** Millenium Lisp %s ***\n", gGIT_VERSION);
   puts("Fun lisp implementation in C!");
   puts("Well ..., have fun!");
 }
