@@ -1,6 +1,8 @@
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <stdbool.h>
+#include <editline.h>
 
 #include "version.h"
 
@@ -17,16 +19,16 @@ void intro()
 
 int main(int argc, char *argv[])
 {
-  char buffer[2048] = "\0";
   bool cont = true;
 
   intro();
 
   while(cont)
   {
-    fputs("mlisp@>", stdout);
-    fgets(buffer, 256, stdin);
-    fputs(buffer, stdout);
+    char* input = readline("mlisp@>");
+    add_history(input);
+    printf("%s\n", input);
+    free(input);
   }
   return 0;
 }
